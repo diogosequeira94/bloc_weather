@@ -28,7 +28,13 @@ class WeatherRepositoryImpl implements WeatherRepository {
   }
 
   @override
-  Future<WeatherModel> fetchWeather(int locationId) {
-    throw UnimplementedError();
+  Future<WeatherModel> fetchWeather(int locationId) async {
+    final weatherUrl = '$baseUrl/api/location/$locationId';
+    final weatherResponse = await httpClient.get(weatherUrl);
+    if(weatherResponse.statusCode != 200) {
+      throw Exception('error getting the weather for location');
+    }
+    final weatherJson = jsonDecode(weatherResponse.body);
+    return WeatherModel.fromJson(weatherJson);
   }
 }
