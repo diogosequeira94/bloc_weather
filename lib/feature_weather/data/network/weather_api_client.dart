@@ -7,7 +7,7 @@ class WeatherApiClient {
   static const baseUrl = 'https://www.metaweather.com';
   final http.Client httpClient;
 
-  WeatherApiClient({
+  const WeatherApiClient({
     @required this.httpClient,
   }) : assert(httpClient != null);
 
