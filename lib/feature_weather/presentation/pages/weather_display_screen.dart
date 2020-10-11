@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weather_bloclib/feature_weather/bloc/bloc.dart';
 import 'package:flutter_weather_bloclib/feature_weather/presentation/pages/city_selection_screen.dart';
-import 'package:flutter_weather_bloclib/feature_weather/presentation/widgets/location.dart';
+import 'package:flutter_weather_bloclib/feature_weather/presentation/widgets/last_updated_widget.dart';
+import 'package:flutter_weather_bloclib/feature_weather/presentation/widgets/location_widget.dart';
 
 class WeatherDisplayScreen extends StatelessWidget {
   @override
@@ -50,9 +51,12 @@ class WeatherDisplayScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(top: 100.0),
                     child: Center(
-                      child: Location(location: weather.location),
+                      child: LocationWidget(location: weather.location),
                     ),
-                  )
+                  ),
+                  Center(
+                    child: LastUpdatedWidget(dateTime: weather.lastUpdated),
+                  ),
                 ],
               );
             }

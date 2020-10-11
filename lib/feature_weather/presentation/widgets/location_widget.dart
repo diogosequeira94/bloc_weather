@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-class Location extends StatelessWidget {
+class LocationWidget extends StatelessWidget {
   final String location;
 
-  const Location({Key key, @required this.location})
+  const LocationWidget({Key key, @required this.location})
       : assert(location != null),
       super(key: key);
 
