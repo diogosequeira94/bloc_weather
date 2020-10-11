@@ -14,5 +14,5 @@ void main() {
       httpClient: http.Client(),
     ),
   );
-  runApp(App());
+  runApp(App(weatherRepository: weatherRepository));
 }
