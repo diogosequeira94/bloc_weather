@@ -12,39 +12,37 @@ class WeatherModel extends Equatable {
   final DateTime lastUpdated;
   final String location;
 
-
   WeatherModel({
-      this.condition,
-      this.formattedCondition,
-      this.minTemp,
-      this.temp,
-      this.maxTemp,
-      this.locationId,
-      this.created,
-      this.lastUpdated,
-      this.location,
+    this.condition,
+    this.formattedCondition,
+    this.minTemp,
+    this.temp,
+    this.maxTemp,
+    this.locationId,
+    this.created,
+    this.lastUpdated,
+    this.location,
   });
 
   @override
   List<Object> get props => [
-    condition,
-    formattedCondition,
-    minTemp,
-    temp,
-    maxTemp,
-    locationId,
-    created,
-    lastUpdated,
-    location,
-  ];
+        condition,
+        formattedCondition,
+        minTemp,
+        temp,
+        maxTemp,
+        locationId,
+        created,
+        lastUpdated,
+        location,
+      ];
 
   //Model will have a fromJson method without using external lib
   static WeatherModel fromJson(dynamic json) {
-    final consolidatedWeather = json['consolidatedWeather'][0];
+    final consolidatedWeather = json['consolidated_weather'][0];
     return WeatherModel(
       condition: _mapStringToWeatherCondition(
-        consolidatedWeather['weather_state_abbr']
-      ),
+          consolidatedWeather['weather_state_abbr']),
       formattedCondition: consolidatedWeather['weather_state_name'],
       minTemp: consolidatedWeather['min_temp'] as double,
       temp: consolidatedWeather['the_temp'] as double,
@@ -94,7 +92,4 @@ class WeatherModel extends Equatable {
     }
     return state;
   }
-
 }
-
-

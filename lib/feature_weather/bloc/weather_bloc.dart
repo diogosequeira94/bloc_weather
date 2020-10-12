@@ -22,9 +22,9 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       yield WeatherLoading('Loading weather info...');
       try {
         final WeatherModel weatherModel = await weatherRepositoryImpl.fetchWeather(event.city);
-        yield WeatherLoaded(weatherModel);
-      } catch (_) {
-        yield WeatherLoadingFailure('Failed fetching weather info, try again');
+        yield WeatherLoaded(weather: weatherModel);
+      } catch (e) {
+        yield WeatherLoadingFailure(e.toString());
       }
     }
   }

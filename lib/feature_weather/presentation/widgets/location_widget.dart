@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 class LocationWidget extends StatelessWidget {
   final String location;
 
-  const LocationWidget({Key key, @required this.location})
+   LocationWidget({Key key, @required this.location})
       : assert(location != null),
       super(key: key);
 
@@ -15,7 +15,7 @@ class LocationWidget extends StatelessWidget {
       style: TextStyle(
         fontSize: 30,
         fontWeight: FontWeight.bold,
-        color: Colors.white,
+        color: Colors.black,
       ),
     );
   }

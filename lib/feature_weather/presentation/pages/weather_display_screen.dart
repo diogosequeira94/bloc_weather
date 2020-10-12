@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weather_bloclib/feature_weather/bloc/bloc.dart';
-import 'package:flutter_weather_bloclib/feature_weather/presentation/pages/city_selection_screen.dart';
-import 'package:flutter_weather_bloclib/feature_weather/presentation/widgets/last_updated_widget.dart';
 import 'package:flutter_weather_bloclib/feature_weather/presentation/widgets/location_widget.dart';
+import 'package:flutter_weather_bloclib/feature_weather/presentation/widgets/widgets.dart';
+
+import 'city_selection_screen.dart';
 
 class WeatherDisplayScreen extends StatelessWidget {
   @override
@@ -16,12 +18,12 @@ class WeatherDisplayScreen extends StatelessWidget {
             icon: Icon(Icons.search),
             onPressed: () async {
               final city = await Navigator.push(
-                  context,
+                context,
                 MaterialPageRoute(
                   builder: (context) => CitySelectionScreen(),
                 ),
               );
-              if(city != null){
+              if (city != null) {
                 BlocProvider.of<WeatherBloc>(context)
                     .add(WeatherFetched(city: city));
               }
@@ -29,25 +31,27 @@ class WeatherDisplayScreen extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.settings),
-            onPressed: (){},
+            onPressed: () {},
           ),
         ],
       ),
       body: Center(
         child: BlocBuilder<WeatherBloc, WeatherState>(
-          builder: (context, state){
-            if(state is WeatherInitial){
+          builder: (context, state) {
+            if (state is WeatherInitial) {
               return Center(
                 child: Text('Please select a location'),
               );
-            } else if (state is WeatherLoading){
+            }
+            if (state is WeatherLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is WeatherLoaded){
+            }
+            if (state is WeatherLoaded) {
               final weather = state.weather;
               return ListView(
-                children: [
+                children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(top: 100.0),
                     child: Center(
@@ -57,8 +61,24 @@ class WeatherDisplayScreen extends StatelessWidget {
                   Center(
                     child: LastUpdatedWidget(dateTime: weather.lastUpdated),
                   ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 50.0),
+                    child: Center(
+                      child: CombinedWeatherTemperature(
+                        weather: weather,
+                      ),
+                    ),
+                  ),
                 ],
               );
+            }
+            if (state is WeatherLoadingFailure) {
+              return Text(
+                state.message,
+                style: TextStyle(color: Colors.red),
+              );
+            } else {
+              return Container();
             }
           },
         ),
