@@ -66,8 +66,9 @@ class _WeatherDisplayScreenState extends State<WeatherDisplayScreen> {
           child: BlocConsumer<WeatherBloc, WeatherState>(
             listener: (context, state){
               if(state is WeatherLoaded) {
-                _refreshCompleter?.complete();
-                _refreshCompleter = Completer();
+                Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text('Hello!'),
+                ));
               }
             },
             builder: (context, state) {
